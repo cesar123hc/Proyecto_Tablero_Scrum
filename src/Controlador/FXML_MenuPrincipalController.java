@@ -23,6 +23,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
@@ -66,6 +67,8 @@ public class FXML_MenuPrincipalController implements Initializable {
     private FXML_InfoPersonalController controlador_infoUsuario;
     private FXMLAgregarUsuarioController controlador_AgregarUsuario;
     
+    private ProyectoVO proyecto;
+    
     private Stage stagePrincipal;
     private Stage stageVentana;
     
@@ -92,6 +95,72 @@ public class FXML_MenuPrincipalController implements Initializable {
    
     @FXML
     private Button btnProyecto;
+    
+    @FXML
+    private Button botonEliminarP;
+
+    @FXML
+    private Button botonModificarP;
+    
+    @FXML
+    void ModificarProyecto(ActionEvent event) {
+        int seleccionado = this.Tabla_Proyectos.getSelectionModel().getSelectedIndex();
+        if(seleccionado>=0){
+            this.proyecto=this.Tabla_Proyectos.getSelectionModel().getSelectedItem();
+            System.out.println("1"+proyecto.getNombre());
+            boolean esEdicion = this.mostrarModificarProy();
+            if(esEdicion){
+                this.colocarProyectosTabla();
+            }
+        }else{
+            Alert alert = new Alert(Alert.AlertType.NONE,"Selecciona el proyecto a modificar");
+            alert.show();
+        }
+    }
+    
+    public boolean mostrarModificarProy(){
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("/Vista/FXML_ModificarProyecto.fxml"));
+            Parent dialogoEditar = (Parent) loader.load();
+            Stage dialogoStage = new Stage();
+            dialogoStage.setTitle("Editar Usuario");
+            dialogoStage.initModality(Modality.WINDOW_MODAL);
+            dialogoStage.initOwner(stagePrincipal);
+            Scene scene = new Scene(dialogoEditar);
+            dialogoStage.setScene(scene);
+            
+            FXML_ModificarProyectoController controlador = loader.getController();
+            controlador.setStageVentana(dialogoStage);
+            //this.setControlador(controlador);
+            controlador.setProyecto(this.proyecto);
+            dialogoStage.showAndWait();
+            return controlador.getEsEdicion();
+           
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+    
+    @FXML
+    void eliminarProyecto(ActionEvent event) {
+        int seleccionado = this.Tabla_Proyectos.getSelectionModel().getSelectedIndex();
+        if(seleccionado>=0){
+            ProyectoVO proyecto=this.Tabla_Proyectos.getSelectionModel().getSelectedItem();
+            this.Tabla_Proyectos.getSelectionModel().selectLast();
+            try {
+                this.implementacionDAO.delete(proyecto);
+            } catch (Exception e) {
+                System.out.println("Error al eliminar Usuario");
+            }
+            if(seleccionado!=0){
+                seleccionado--;
+                this.Tabla_Proyectos.getSelectionModel().select(seleccionado);
+            }
+        }
+    }
+    
     @FXML
     void crearProyecto(ActionEvent event) {
         this.usuario_Principal.toString();
@@ -223,7 +292,28 @@ public class FXML_MenuPrincipalController implements Initializable {
     
     @FXML
     void cerrarSesion(ActionEvent event) {
-
+        Stage stage = (Stage) this.MenuPerfil.getScene().getWindow();
+        stage.close();
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("/Vista/FXML_Iniciar_Sesion.fxml"));
+            Parent dialogoEditar = (Parent) loader.load();
+            Stage dialogoStage = new Stage();
+            dialogoStage.setTitle("Iniciar sesion");
+            dialogoStage.initModality(Modality.WINDOW_MODAL);
+            dialogoStage.initOwner(stagePrincipal);
+            Scene scene = new Scene(dialogoEditar);
+            dialogoStage.setScene(scene);
+            
+            FXML_InicioSesionController controlador = loader.getController();
+            //controlador.setStageVentana(dialogoStage);
+            //this.setControlador(controlador);
+            
+            dialogoStage.showAndWait();
+           
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
     
     

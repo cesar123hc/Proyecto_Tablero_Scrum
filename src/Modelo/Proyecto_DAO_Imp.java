@@ -5,7 +5,7 @@
  */
 package Modelo;
 
-import com.mysql.cj.jdbc.exceptions.CommunicationsException;
+import com.mysql.jdbc.CommunicationsException;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -86,14 +86,58 @@ public class Proyecto_DAO_Imp implements Proyecto_DAO{
     
     @Override
     public boolean update(ProyectoVO proyecto)throws Exception{
-        return false;
+       // System.out.println(proyecto.toString());
+        boolean update = false;
+        Statement stm = null;
+        Connection con = null;
         
+        String sql = "update proyecto set nombre='"+proyecto.getNombre()+"' where id=" + proyecto.getId();
+        ConexionDB cc = new ConexionDB();
+        System.out.println(sql);
+        try {
+            con = cc.conectarMySQL();
+            stm = con.createStatement();
+            stm.execute(sql);
+            update = true;
+            System.out.println("Creacion Realizada");
+            stm.close();
+            con.close();
+        } catch (SQLException e) {
+            throw new Exception("Error en create SQLException: " + e.getMessage());
+        } catch (NullPointerException e){
+            throw new Exception("Error en create objeto null: " + e.getMessage());
+        } catch(Exception e){
+            throw new Exception("Error en create: " + e.getMessage());
+        }
+        return update;
     }
     
     @Override
     public boolean delete(ProyectoVO proyecto)throws Exception{
-        return false;
+        System.out.println(proyecto.toString());
+        boolean delete = false;
+        Statement stm = null;
+        Connection con = null;
         
+        String sql = "delete from proyecto where id=" + proyecto.getId();
+        ConexionDB cc = new ConexionDB();
+        System.out.println(sql);
+        try {
+            con = cc.conectarMySQL();
+            stm = con.createStatement();
+            stm.execute(sql);
+            delete = true;
+            System.out.println("proyecto eliminado");
+            stm.close();
+            con.close();
+        } catch (SQLException e) {
+            throw new Exception("Error en create SQLException: " + e.getMessage());
+        } catch (NullPointerException e){
+            throw new Exception("Error en create objeto null: " + e.getMessage());
+        } catch(Exception e){
+            throw new Exception("Error en create: " + e.getMessage());
+        }
+        return delete;
     }
     
     @Override

@@ -94,8 +94,8 @@
          </image>
       </ImageView>
       <Button fx:id="btnProyecto" layoutX="22.0" layoutY="169.0" mnemonicParsing="false" onAction="#crearProyecto" text="Crear Proyecto" />
-      <Button layoutX="24.0" layoutY="212.0" mnemonicParsing="false" text="Elminar Proyecto" />
-      <Button layoutX="25.0" layoutY="253.0" mnemonicParsing="false" text="Modificar Proyecto" />
+      <Button fx:id="botonEliminarP" layoutX="24.0" layoutY="212.0" mnemonicParsing="false" onAction="#eliminarProyecto" text="Elminar Proyecto" />
+      <Button fx:id="botonModificarP" layoutX="25.0" layoutY="253.0" mnemonicParsing="false" onAction="#ModificarProyecto" text="Modificar Proyecto" />
       <Label fx:id="lblSaludo" layoutX="786.0" layoutY="139.0" prefHeight="28.0" prefWidth="131.0" text="-----" />
       <Label layoutX="260.0" layoutY="155.0" prefHeight="26.0" prefWidth="195.0" text="Agregar Integrante Proyecto" textFill="WHITE">
          <font>

@@ -32,13 +32,13 @@ public class ConexionDB {
     public String port = "3306";
 
     // Ruta de nuestra base de datos (desactivamos el uso de SSL con "?useSSL=false")
-    public String url = "jdbc:mysql://" + hostname + ":" + port + "/" + database + "?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
+    public String url = "jdbc:mysql://" + hostname + ":" + port + "/" + database + "?useSSL=false";
 
     // Nombre de usuario
     public String username = "root";
 
     // Clave de usuario
-    public String password = "CSMZ203M";
+    public String password = "lunela1234";
 
     public Connection conectarMySQL()throws Exception {
         Connection conn = null;

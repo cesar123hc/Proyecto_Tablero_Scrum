@@ -5,7 +5,7 @@
  */
 package Modelo;
 
-import com.mysql.cj.jdbc.exceptions.CommunicationsException;
+import com.mysql.jdbc.CommunicationsException;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;

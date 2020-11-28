@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="505.0" prefWidth="417.0" style="-fx-background-color: #32DADC; -fx-border-color: #ffffff;" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controlador.FXML_ModificarUsuarioController">
+    <stylesheets>
+        <URL value="@fxml_modificarusuario.css" />
+    </stylesheets>
+   <children>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1f93ff01" height="47.0" layoutX="41.0" layoutY="30.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="2.0" width="352.0" />
+      <Label layoutX="79.0" layoutY="41.0" text="AJUSTES DE INFORMACIÓN" textFill="WHITE">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="21.0" />
+         </font>
+      </Label>
+      <GridPane layoutX="21.0" layoutY="112.0" prefHeight="99.0" prefWidth="315.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Label text="CORREO:" />
+            <Label text="NOMBRE: " GridPane.rowIndex="1" />
+            <Label text="APELLIDOS:" GridPane.rowIndex="2" />
+            <TextField fx:id="lblNombre" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <TextField fx:id="lblApellidos" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Label fx:id="lblCorreo" prefHeight="28.0" prefWidth="156.0" text="-----" GridPane.columnIndex="1" />
+         </children>
+      </GridPane>
+      <GridPane layoutX="21.0" layoutY="211.0" prefHeight="99.0" prefWidth="315.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Label text="FECHA DE NACIMIENTO:" />
+            <Label text="RESPUESTA RECUPERACIÓN:" GridPane.rowIndex="1" />
+            <Label text="CONTRASEÑA:" GridPane.rowIndex="2" />
+            <TextField fx:id="lblFechaNacimiento" GridPane.columnIndex="1" />
+            <TextField fx:id="lblRespuesta" prefHeight="25.0" prefWidth="160.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <TextField fx:id="lblContrasena" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+         </children>
+      </GridPane>
+      <GridPane layoutX="21.0" layoutY="310.0" prefHeight="99.0" prefWidth="315.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Label text="CONFIRMA CONTRASEÑA:" />
+            <Button fx:id="btnCancelar" mnemonicParsing="false" onAction="#accionCancelar" prefHeight="25.0" prefWidth="163.0" text="CANCELAR" GridPane.rowIndex="2" />
+            <Button fx:id="btnGuardar" mnemonicParsing="false" onAction="#accionGuardar" prefHeight="25.0" prefWidth="174.0" text="GUARDAR CAMBIOS" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <PasswordField fx:id="lblConfirmacionContrasena" GridPane.columnIndex="1" />
+         </children>
+      </GridPane>
+      <Label layoutX="339.0" layoutY="220.0" prefHeight="17.0" prefWidth="67.0" text="(dd/mm/aa)" />
+      <Label layoutX="51.0" layoutY="89.0" text="Ingresa la información que se te pide:">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

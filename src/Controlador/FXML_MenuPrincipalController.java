@@ -7,6 +7,8 @@ package Controlador;
 
 import Modelo.ProyectoVO;
 import Modelo.Proyecto_DAO_Imp;
+import Modelo.TableroVO;
+import Modelo.Tablero_DAO_Imp;
 import Modelo.UsuarioVO;
 import java.net.URL;
 import java.text.DateFormat;
@@ -15,6 +17,8 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -44,6 +48,11 @@ import javafx.stage.Stage;
  * @author cesar
  */
 public class FXML_MenuPrincipalController implements Initializable {
+    @FXML
+    private Button btn2;
+
+    @FXML
+    private Button btn1;
     @FXML
     private Button agregarIntegrante;
     @FXML
@@ -85,6 +94,7 @@ public class FXML_MenuPrincipalController implements Initializable {
     @FXML
     private Pane Titulo;
     private UsuarioVO usuario_Principal;
+    private Tablero_DAO_Imp implementacionTablero;
     
     @FXML
     private ImageView Imagen_Perfil;
@@ -92,6 +102,7 @@ public class FXML_MenuPrincipalController implements Initializable {
     @FXML
     private MenuButton MenuPerfil;
     private ObservableList<ProyectoVO> listaDeProyectos;
+     private ObservableList<TableroVO> listaDeTableros;
      private Proyecto_DAO_Imp implementacionDAO;
    
     @FXML
@@ -312,6 +323,7 @@ public class FXML_MenuPrincipalController implements Initializable {
        
     }
     public void obtenerProyectos(){
+        
         List listaConsulta=null;
         try {
             listaConsulta=implementacionDAO.readAll();
@@ -321,12 +333,13 @@ public class FXML_MenuPrincipalController implements Initializable {
         Iterator it=listaConsulta.iterator();
         listaDeProyectos.clear();
         while(it.hasNext()){
+            
             listaDeProyectos.add((ProyectoVO)it.next());
         }
     }
     
     public void colocarProyectosTabla(){
-        this.obtenerProyectos();
+        obtenerProyectos();
         this.columnaProyectos.setCellValueFactory(new PropertyValueFactory<>("nombre"));
         this.Tabla_Proyectos.setItems(listaDeProyectos);
         
@@ -382,6 +395,56 @@ public class FXML_MenuPrincipalController implements Initializable {
         }
         return false;
     }
+    void actulizarGridPanel() {
+        obtenerTableros();
+        AgregarTableros();
+    }
+    void obtenerTableros() {
+        
+          List listaConsulta=null;
+        try {
+            listaConsulta=this.implementacionTablero.readAll();
+        } catch (Exception e) {
+            System.out.println("Error al leer la consulta");
+        }
+         System.out.println(listaConsulta);
+         System.out.println("Mensaje ");
+        Iterator it=listaConsulta.iterator();
+        this.listaDeTableros.clear();
+        while(it.hasNext()){
+            this.listaDeTableros.add((TableroVO)it.next());
+             
+            ;
+        }
+         
+    }
+    void AgregarTableros() {
+        System.out.println("Mensaje ");
+       //System.out.println(this.listaDeTableros.toString());
+        System.out.println( this.listaDeTableros.isEmpty());
+        if(this.listaDeTableros.isEmpty()){
+            System.out.println("Mensaje dentro");
+            if(this.listaDeTableros.isEmpty()){
+                this.btn1.setText(this.listaDeTableros.get(0).getNombre());
+                this.btn1.setVisible(true);
+            }
+            if(this.listaDeTableros.isEmpty()){
+                this.btn1.setText(this.listaDeTableros.get(1).getNombre());
+                this.btn2.setVisible(true);
+            }
+            if(this.listaDeTableros.isEmpty()){
+                
+            }
+            if(this.listaDeTableros.isEmpty()){
+                
+            }
+            if(this.listaDeTableros.isEmpty()){
+                
+            }
+            
+            
+        }
+    }
     @FXML
     void mostrarInfo(ActionEvent event) {
         if(this.mostrarInformacionUsuario()){
@@ -397,16 +460,34 @@ public class FXML_MenuPrincipalController implements Initializable {
      * @param url
      * @param rb
      */
+    @FXML
+    void tablero1(ActionEvent event) {
+
+    }
+
+    @FXML
+    void tablero2(ActionEvent event) {
+
+    }
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        this.listaDeTableros= FXCollections.observableArrayList();
         // TODO
-       // Image image = new Image("file:" + "C:\Users\cesar\Desktop\Metodologias de desarrollo\Nueva Carpeta\Proyecto_Final\Imagenes\Perfil.png");
+        // Image image = new Image("file:" + "C:\Users\cesar\Desktop\Metodologias de desarrollo\Nueva Carpeta\Proyecto_Final\Imagenes\Perfil.png");
          //   this.imagenCuadro.setImage(image);
         this.implementacionDAO=new Proyecto_DAO_Imp();
+        implementacionTablero=new Tablero_DAO_Imp();
         this.listaDeProyectos= FXCollections.observableArrayList();
         this.colocarProyectosTabla();
         this.controlador_infoUsuario= new FXML_InfoPersonalController();
+        this.btn1.setVisible(false);
+        this.btn2.setVisible(false);
+        actulizarGridPanel();
         
+        
+        
+        //this.Tabla_Proyectos.getSelectionModel().selectedItemProperty().addListener(
+              //  (observable,oldValue,newValue) ->this.actulizarGridPanel(newValue));
          
     }    
     

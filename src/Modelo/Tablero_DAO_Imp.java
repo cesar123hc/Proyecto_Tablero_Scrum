@@ -6,8 +6,10 @@
 package Modelo;
 
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -23,7 +25,7 @@ public class Tablero_DAO_Imp implements Tablero_DAO{
         Statement stm = null;
         Connection con = null;
         String auxId=Integer.toString(tablero.getIdProyecto());
-        String sql = "INSERT INTO tablero values (NULL,'" + tablero.getNombre()+"','"+tablero.getCreador()+"','"+ tablero.getFecha()+"',"+auxId+")";
+        String sql = "INSERT INTO tablero values (NULL,'" + tablero.getNombre()+"','"+tablero.getFecha()+"','"+ tablero.getCreador()+"',"+auxId+")";
         ConexionDB cc = new ConexionDB();
         System.out.println(sql);
         try {
@@ -46,7 +48,31 @@ public class Tablero_DAO_Imp implements Tablero_DAO{
 
     @Override
     public List<TableroVO> readAll() throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       Connection con = null;
+        Statement stm = null;
+        ResultSet rs = null;
+        String sql = "select * from tablero order by id";
+
+        List<TableroVO> listaTableros = new ArrayList<TableroVO>();
+
+        try {
+            con = new ConexionDB().conectarMySQL();
+            stm = con.createStatement();
+            rs = stm.executeQuery(sql);
+            while (rs.next()) {
+                TableroVO c = new TableroVO(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4), rs.getInt(5));
+                listaTableros.add(c);
+            }
+            stm.close();
+            rs.close();
+            con.close();
+        } catch (SQLException e) {
+            throw new Exception("Error en readAll SQLException: " + e.getCause().toString());
+        }catch(Exception e){
+            throw new Exception("Error en readAll: " + e.getCause().toString());
+        }
+
+        return listaTableros;
     }
 
     @Override

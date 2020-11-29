@@ -54,6 +54,26 @@ public class FXML_MenuPrincipalController implements Initializable {
     @FXML
     private Button btn1;
     @FXML
+    private Button btn3;
+
+    @FXML
+    private Button btn7;
+
+    @FXML
+    private Button btn6;
+
+    @FXML
+    private Button btn5;
+
+    @FXML
+    private Button btn4;
+
+    @FXML
+    private Button btn9;
+
+    @FXML
+    private Button btn8;
+    @FXML
     private Button agregarIntegrante;
     @FXML
     private Button btnCrearTablero;
@@ -395,15 +415,18 @@ public class FXML_MenuPrincipalController implements Initializable {
         }
         return false;
     }
-    void actulizarGridPanel() {
-        obtenerTableros();
+    void actulizarGridPanel(ProyectoVO proyectoSeleccionado) {
+        System.out.println("Mensaje importante"+ proyectoSeleccionado.toString());
+        
+        restaurarTblero();
+        obtenerTableros(proyectoSeleccionado.getId());
         AgregarTableros();
     }
-    void obtenerTableros() {
+    void obtenerTableros(int id) {
         
           List listaConsulta=null;
         try {
-            listaConsulta=this.implementacionTablero.readAll();
+            listaConsulta=this.implementacionTablero.readAllProyecto(id);
         } catch (Exception e) {
             System.out.println("Error al leer la consulta");
         }
@@ -422,28 +445,70 @@ public class FXML_MenuPrincipalController implements Initializable {
         System.out.println("Mensaje ");
        //System.out.println(this.listaDeTableros.toString());
         System.out.println( this.listaDeTableros.isEmpty());
-        if(this.listaDeTableros.isEmpty()){
+        System.out.println(this.listaDeTableros.size());
+        int i=0;
+        
+        if(!this.listaDeTableros.isEmpty()){
+            
             System.out.println("Mensaje dentro");
-            if(this.listaDeTableros.isEmpty()){
+            if(i<this.listaDeTableros.size()){
                 this.btn1.setText(this.listaDeTableros.get(0).getNombre());
                 this.btn1.setVisible(true);
+                
             }
-            if(this.listaDeTableros.isEmpty()){
-                this.btn1.setText(this.listaDeTableros.get(1).getNombre());
+            i++;
+            if(i<this.listaDeTableros.size()){
+                this.btn2.setText(this.listaDeTableros.get(1).getNombre());
                 this.btn2.setVisible(true);
             }
-            if(this.listaDeTableros.isEmpty()){
-                
+            i++;
+            if( i < this.listaDeTableros.size()){
+                this.btn3.setText(this.listaDeTableros.get(2).getNombre());
+                this.btn3.setVisible(true);
             }
-            if(this.listaDeTableros.isEmpty()){
-                
+            i++;
+            if(i<this.listaDeTableros.size()){
+                this.btn4.setText(this.listaDeTableros.get(3).getNombre());
+                this.btn4.setVisible(true);
             }
-            if(this.listaDeTableros.isEmpty()){
-                
+            i++;
+            if( i<this.listaDeTableros.size()){
+                this.btn5.setText(this.listaDeTableros.get(4).getNombre());
+                this.btn5.setVisible(true);
             }
-            
-            
+            i++;
+            if(i<this.listaDeTableros.size()){
+                this.btn6.setText(this.listaDeTableros.get(5).getNombre());
+                this.btn6.setVisible(true);
+            }
+            i++;
+            if( i<this.listaDeTableros.size()){
+                this.btn7.setText(this.listaDeTableros.get(6).getNombre());
+                this.btn7.setVisible(true);
+            }
+            i++;
+            if(i<this.listaDeTableros.size()){
+                this.btn8.setText(this.listaDeTableros.get(7).getNombre());
+                this.btn8.setVisible(true);
+            }
+            i++;
+            if(i<this.listaDeTableros.size()){
+                this.btn9.setText(this.listaDeTableros.get(8).getNombre());
+                this.btn9.setVisible(true);
+            }
         }
+    }
+    void restaurarTblero(){
+         
+        this.btn1.setVisible(false);
+        this.btn2.setVisible(false);
+         this.btn3.setVisible(false);
+         this.btn4.setVisible(false);
+         this.btn5.setVisible(false);
+         this.btn6.setVisible(false);
+          this.btn7.setVisible(false);
+          this.btn8.setVisible(false);
+         
     }
     @FXML
     void mostrarInfo(ActionEvent event) {
@@ -469,6 +534,40 @@ public class FXML_MenuPrincipalController implements Initializable {
     void tablero2(ActionEvent event) {
 
     }
+     @FXML
+    void tablero3(ActionEvent event) {
+
+    }
+
+    @FXML
+    void tablero4(ActionEvent event) {
+
+    }
+
+    @FXML
+    void tablero5(ActionEvent event) {
+
+    }
+
+    @FXML
+    void tablero6(ActionEvent event) {
+
+    }
+
+    @FXML
+    void tablero7(ActionEvent event) {
+
+    }
+
+    @FXML
+    void tablero8(ActionEvent event) {
+
+    }
+
+    @FXML
+    void tablero9(ActionEvent event) {
+
+    }
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         this.listaDeTableros= FXCollections.observableArrayList();
@@ -482,12 +581,16 @@ public class FXML_MenuPrincipalController implements Initializable {
         this.controlador_infoUsuario= new FXML_InfoPersonalController();
         this.btn1.setVisible(false);
         this.btn2.setVisible(false);
-        actulizarGridPanel();
-        
-        
-        
-        //this.Tabla_Proyectos.getSelectionModel().selectedItemProperty().addListener(
-              //  (observable,oldValue,newValue) ->this.actulizarGridPanel(newValue));
+         this.btn3.setVisible(false);
+         this.btn4.setVisible(false);
+         this.btn5.setVisible(false);
+         this.btn6.setVisible(false);
+          this.btn7.setVisible(false);
+          this.btn8.setVisible(false);
+         
+          this.btn9.setVisible(false);
+        this.Tabla_Proyectos.getSelectionModel().selectedItemProperty().addListener(
+                (observable,oldValue,newValue) ->this.actulizarGridPanel(newValue));
          
     }    
     

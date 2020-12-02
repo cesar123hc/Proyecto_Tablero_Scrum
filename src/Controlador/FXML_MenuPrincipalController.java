@@ -270,6 +270,29 @@ public class FXML_MenuPrincipalController implements Initializable {
         }
        
     }
+    public void mostrarTableroPrincipal(TableroVO tablero){
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("/Vista/FXML_VentanaTablero.fxml"));
+            Parent dialogoEditar = (Parent) loader.load();
+            Stage dialogoStage = new Stage();
+            dialogoStage.setTitle("Registro Usuario");
+            dialogoStage.initModality(Modality.WINDOW_MODAL);
+            dialogoStage.initOwner(stagePrincipal);
+            Scene scene = new Scene(dialogoEditar);
+            dialogoStage.setScene(scene);
+            
+            FXML_VentanaTableroController controlador = loader.getController();
+            controlador.setStageVentana(dialogoStage);
+            //this.setControlador(controlador);
+            controlador.setUsuarioPrincipal(tablero);
+            dialogoStage.showAndWait();   
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+       
+    }
+    
     public void mostrarCrearTablero(ProyectoVO proyectoSeleccionado){
         try {
             FXMLLoader loader = new FXMLLoader();
@@ -527,46 +550,48 @@ public class FXML_MenuPrincipalController implements Initializable {
      */
     @FXML
     void tablero1(ActionEvent event) {
-
+        mostrarTableroPrincipal(this.listaDeTableros.get(0));
     }
 
     @FXML
     void tablero2(ActionEvent event) {
+        mostrarTableroPrincipal(this.listaDeTableros.get(1));
 
     }
      @FXML
     void tablero3(ActionEvent event) {
-
+        mostrarTableroPrincipal(this.listaDeTableros.get(2));
     }
 
     @FXML
     void tablero4(ActionEvent event) {
-
+        mostrarTableroPrincipal(this.listaDeTableros.get(3));
     }
 
     @FXML
     void tablero5(ActionEvent event) {
+        mostrarTableroPrincipal(this.listaDeTableros.get(4));
 
     }
 
     @FXML
     void tablero6(ActionEvent event) {
-
+        mostrarTableroPrincipal(this.listaDeTableros.get(5));
     }
 
     @FXML
     void tablero7(ActionEvent event) {
-
+        mostrarTableroPrincipal(this.listaDeTableros.get(6));
     }
 
     @FXML
     void tablero8(ActionEvent event) {
-
+        mostrarTableroPrincipal(this.listaDeTableros.get(7));
     }
 
     @FXML
     void tablero9(ActionEvent event) {
-
+        mostrarTableroPrincipal(this.listaDeTableros.get(8));
     }
     @Override
     public void initialize(URL url, ResourceBundle rb) {
